@@ -1,0 +1,30 @@
+language: java
+
+jdk:
+  - oraclejdk8
+
+env:
+  global:
+    # replace with your docker registry account name (e.g. Amazon ECR)
+    - DOCKER_ACC=288971733297.dkr.ecr.us-east-1.amazonaws.com
+    - DOCKER_REPO=shipdemo-java-ecr-eb
+
+build:
+  ci:
+    # create directories for testresults and codecoverage output
+    - mkdir -p shippable/testresults && mkdir -p shippable/codecoverage
+    # build using Maven
+    - mvn -q -B clean cobertura:cobertura install
+    - ls -al $SHIPPABLE_BUILD_DIR/target
+    # build docker image and push to registry
+    - docker build -t $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER
+    - docker push $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER
+
+  on_success:
+    # save latest image version to state
+    - echo versionName=$BRANCH.$BUILD_NUMBER > /build/state/demo_java_ecr_img.env
+
+integrations:
+  hub:
+    - integrationName: ttrahan-ecr
+      type: ecr

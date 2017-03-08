@@ -1,0 +1,52 @@
+jobs:
+
+######################### NATIVE WAR CI/CD JOBS #########################
+
+# runCI job that builds and pushes artifact to S3
+  - name: java-s3-runcli-ec2_runCI
+    type: runCI
+    steps:
+      - OUT: demo_war_s3_file 
+
+# runCLI job that deploys artifact in S3 to EC2 - TEST
+  - name: demo_war_s3_test_deploy
+    type: runCLI
+    steps:
+      - IN: demo_war_s3_file
+      - IN: demo_war_s3_cls
+      - IN: demo_war_s3_awscli
+      - TASK:
+        # display location of latest build in S3
+        - script: echo "Latest build is in S3 at "$DEMO_WAR_S3_FILE_SOURCENAME/$DEMO_WAR_S3_FILE_VERSIONNAME
+        # download latest build file to job 
+        - script: aws s3 cp s3://$DEMO_WAR_S3_FILE_SOURCENAME/$DEMO_WAR_S3_FILE_VERSIONNAME ~/HelloWorld.war
+        # create identity file from credentials injected for VM cluster
+        - script: echo -e "$DEMO_WAR_S3_CLS_INTEGRATION_PRIVATEKEY" > ~/.ssh/ec2-node && sudo chmod 600 ~/.ssh/ec2-node && echo "identity file created"
+        # for each node in the Node Cluster, deploy the latest build file 
+        - script: for (( i=0; i<$(echo $DEMO_WAR_S3_CLS_INTEGRATION_NODES | jq '. | length' ) ; i++ )) do TARGET=$(echo $DEMO_WAR_S3_CLS_INTEGRATION_NODES | jq -r .[$i].name)  && scp -i ~/.ssh/ec2-node ~/HelloWorld.war shippable@$TARGET:/opt/tomcat-test/webapps && echo "file deployed to Tomcat server $TARGET - test instance"; done;
+        # save latest deployment to state
+        - script: echo -e "LATEST_TEST_DEPLOY=$DEMO_WAR_S3_FILE_VERSIONNAME" >> $DEMO_WAR_S3_TEST_DEPLOY_STATE/latest_test_deploy.env
+
+# runCLI job that deploys artifact in S3 to EC2 - PROD
+# based on previous deployment to TEST environment
+  - name: demo_war_s3_prod_deploy
+    type: runCLI
+    steps:
+      - IN: demo_war_s3_test_deploy
+        switch: off
+      - IN: demo_war_s3_file
+        switch: off
+      - IN: demo_war_s3_cls
+      - IN: demo_war_s3_awscli
+      - TASK:
+        # load last build version deployed to test from incoming state file
+        - script: source $DEMO_WAR_S3_TEST_DEPLOY_STATE/latest_test_deploy.env
+        # display location of latest build in S3
+        - script: echo "Latest test deployment is in S3 at "$DEMO_WAR_S3_FILE_SOURCENAME/$LATEST_TEST_DEPLOY
+        # download latest build file to job 
+        - script: aws s3 cp s3://$DEMO_WAR_S3_FILE_SOURCENAME/$LATEST_TEST_DEPLOY ~/HelloWorld.war
+        # create identity file from credentials injected for VM cluster
+        - script: echo -e "$DEMO_WAR_S3_CLS_INTEGRATION_PRIVATEKEY" > ~/.ssh/ec2-node && sudo chmod 600 ~/.ssh/ec2-node && echo "identity file created"
+        # for each node in the Node Cluster, deploy the latest build file 
+        - script: for (( i=0; i<$(echo $DEMO_WAR_S3_CLS_INTEGRATION_NODES | jq '. | length' ) ; i++ )) do TARGET=$(echo $DEMO_WAR_S3_CLS_INTEGRATION_NODES | jq -r .[$i].name)  && scp -i ~/.ssh/ec2-node ~/HelloWorld.war shippable@$TARGET:/opt/tomcat-prod/webapps && echo "file deployed to Tomcat server $TARGET - prod instance"; done;
+
