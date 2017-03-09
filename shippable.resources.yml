@@ -1,5 +1,4 @@
 resources:
-###################### NATIVE WAR CI/CD RESOURCES #########################
 # docker image resource
   - name: demo_java_ecr_img
     type: image
@@ -31,7 +30,7 @@ resources:
       params:
         ENVIRONMENT: "TEST"
         PORT: 80
-        AWS_EB_ENVIRONMENT: "demo_java_ecr_test"
+        AWS_EB_ENVIRONMENT: "demoJavaEcr-test"
 
 # params for PROD environment 
   - name: demo_java_ecr_params_prod
@@ -40,5 +39,5 @@ resources:
       params:
         ENVIRONMENT: "PROD"
         PORT: 80
-        AWS_EB_ENVIRONMENT: "demo_java_ecr_prod"
+        AWS_EB_ENVIRONMENT: "demoJavaEcr-prod"
 
