@@ -20,7 +20,7 @@ jobs:
       - TASK:
         # update Dockerrun.aws.json file with values
         - script: printenv
-        - script: export ENVIRONMENT=$DEMO_JAVA_ECR_PARAMS_TEST_ENVIRONMENT PORT=$DEMO_JAVA_ECR_PARAMS_TEST_PORT
+        - script: export ENVIRONMENT=$DEMO_JAVA_ECR_PARAMS_TEST_PARAMS_ENVIRONMENT PORT=$DEMO_JAVA_ECR_PARAMS_TEST_PARAMS_PORT
         - script: ls -l $DEMO_JAVA_ECR_GITREPO_PATH/gitRepo
         - script: echo $ENVIRONMENT $PORT && shippable_replace $DEMO_JAVA_ECR_GITREPO_PATH/gitRepo/Dockerrun.aws.json 
         - script: cat $DEMO_JAVA_ECR_GITREPO_PATH/gitRepo/Dockerrun.aws.json
