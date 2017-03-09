@@ -22,9 +22,12 @@ jobs:
         # load environment variables 
         - script: export ENVIRONMENT=$DEMO_JAVA_ECR_PARAMS_TEST_PARAMS_ENVIRONMENT PORT=$DEMO_JAVA_ECR_PARAMS_TEST_PARAMS_PORT IMAGE_REPO=$DEMO_JAVA_ECR_IMG_SOURCENAME IMAGE_TAG=$DEMO_JAVA_ECR_IMG_VERSIONNAME
         - script: cd $DEMO_JAVA_ECR_GITREPO_PATH/gitRepo/deploy
+        - script: pwd
         # update Dockerrun.aws.json file with values in env variables
+        - script: echo "updating Dockerrun.aws.json"
         - script: shippable_replace Dockerrun.aws.json 
         # initialize eb cli for app demo_java_ecr
+        - script: echo "initializing EB"
         - script: eb init demo_java_ecr --region us-east-1 --keyname kp-us-east-1
         # deploy latest image to elastic beanstalk
         - script: echo "Deploying new version to Elastic Beanstalk"
