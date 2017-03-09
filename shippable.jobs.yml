@@ -14,12 +14,16 @@ jobs:
     steps:
       - IN: demo_java_ecr_img
       - IN: demo_java_ecr_awscli
+      - IN: demo_java_ecr_params
       - IN: demo_java_ecr_params_test
       - TASK:
+        # install Elastic Beanstalk CLI
+        - script: pip install --upgrade --user awsebcli
         # update Dockerrun.aws.json file with values 
-        - script: ENVIRONMENT=$DEMO_JAVA_ECR_PARAMS_TEST_ENVIRONMENT PORT=$DEMO_JAVA_ECR_PARAMS_TEST_PORT
+        - script: export ENVIRONMENT=$DEMO_JAVA_ECR_PARAMS_TEST_ENVIRONMENT PORT=$DEMO_JAVA_ECR_PARAMS_TEST_PORT
         - script: shippable_replace Dockerrun.aws.json 
         - script: cat Dockerrun.aws.json
+        - script: eb deploy
         # # save latest deployment to state
         # - script: echo -e "LATEST_TEST_DEPLOY=$DEMO_JAVA_ECR_IMG_VERSIONNAME" >> $DEMO_JAVA_ECR_TEST_DEPLOY_STATE/latest_test_deploy.env
 

@@ -17,6 +17,13 @@ resources:
     pointer:
       region: us-east-1
 
+# params shared across for all environments 
+  - name: demo_java_ecr_params
+    type: params
+    version:
+      params:
+        AWS_EB_APPLICATION: "demo_java_ecr"
+
 # params for TEST environment 
   - name: demo_java_ecr_params_test
     type: params
@@ -24,6 +31,7 @@ resources:
       params:
         ENVIRONMENT: "TEST"
         PORT: 80
+        AWS_EB_ENVIRONMENT: "demo_java_ecr_test"
 
 # params for PROD environment 
   - name: demo_java_ecr_params_prod
@@ -32,4 +40,5 @@ resources:
       params:
         ENVIRONMENT: "PROD"
         PORT: 80
+        AWS_EB_ENVIRONMENT: "demo_java_ecr_prod"
 
