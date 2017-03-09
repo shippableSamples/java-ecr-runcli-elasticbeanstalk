@@ -30,7 +30,7 @@ jobs:
         - script: echo "Deploying new version to Elastic Beanstalk"
         - script: eb deploy $DEMO_JAVA_ECR_PARAMS_TEST_PARAMS_AWS_EB_ENVIRONMENT
         # save latest deployment to state
-      - script: echo -e "IMAGE_REPO=$IMAGE_REPO\nIMAGE_TAG=$IMAGE_TAG" >> $DEMO_JAVA_ECR_TEST_DEPLOY_STATE/latest_test_deploy.env
+        - script: echo -e "IMAGE_REPO=$IMAGE_REPO\nIMAGE_TAG=$IMAGE_TAG" >> $DEMO_JAVA_ECR_TEST_DEPLOY_STATE/latest_test_deploy.env
 
 # # runCLI job that deploys image in ECR to Elastic Beanstalk
 # # based on previous deployment to TEST environment
