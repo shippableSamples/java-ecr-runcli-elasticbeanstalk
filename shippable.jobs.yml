@@ -19,7 +19,7 @@ jobs:
       - TASK:
         # update Dockerrun.aws.json file with values 
         - script: export ENVIRONMENT=$DEMO_JAVA_ECR_PARAMS_TEST_ENVIRONMENT PORT=$DEMO_JAVA_ECR_PARAMS_TEST_PORT
-        - script: shippable_replace Dockerrun.aws.json 
+        - script: shippable_replace $SHIPPABLE_BUILD_DIR/Dockerrun.aws.json 
         - script: cat $SHIPPABLE_BUILD_DIR/Dockerrun.aws.json
         - script: eb deploy
         # # save latest deployment to state
