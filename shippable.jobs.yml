@@ -31,7 +31,7 @@ jobs:
         - script: eb init demo_java_ecr --region us-east-1 --keyname kp-us-east-1
         # deploy latest image to elastic beanstalk
         - script: echo "Deploying new version to Elastic Beanstalk"
-        - script: eb deploy $DEMO_JAVA_ECR_PARAMS_TEST_PARAMS_AWS_EB_ENVIRONMENT
+        - script: eb deploy $DEMO_JAVA_ECR_PARAMS_TEST_PARAMS_AWS_EB_ENVIRONMENT --debug --verbose
         # save latest deployment to state
         - script: echo -e "IMAGE_REPO=$IMAGE_REPO\nIMAGE_TAG=$IMAGE_TAG" >> $DEMO_JAVA_ECR_TEST_DEPLOY_STATE/latest_test_deploy.env
 
