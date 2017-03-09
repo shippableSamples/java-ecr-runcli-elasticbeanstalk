@@ -1,22 +1,35 @@
 resources:
 ###################### NATIVE WAR CI/CD RESOURCES #########################
-# S3 WAR reference
-  - name: demo_war_s3_file
-    type: file
-    integration: "ttrahan-aws"
+# docker image resource
+  - name: demo_java_ecr_img
+    type: image
+    integration: ttrahan-ecr
     pointer:
-      sourceName: "shipdemo-java-s3-ec2/builds"
+      # replace with your docker registry URI
+      sourceName: 288971733297.dkr.ecr.us-east-1.amazonaws.com/shipdemo-java-ecr-eb
     seed:
-      versionName: master.1/HelloWorld.war
+      versionName: master.5
 
 # aws CLI config
-  - name: demo_war_s3_awscli
+  - name: demo_java_ecr_awscli
     type: cliConfig
     integration: ttrahan-aws
     pointer:
       region: us-east-1
 
-# VM Cluster
-  - name: demo_war_s3_cls
-    type: cluster
-    integration: "demo-war-s3-vm-cluster"
+# params for TEST environment 
+  - name: demo_java_ecr_params_test
+    type: params
+    version:
+      params:
+        ENVIRONMENT: "TEST"
+        PORT: 80
+
+# params for PROD environment 
+  - name: demo_java_ecr_params_prod
+    type: params
+    version:
+      params:
+        ENVIRONMENT: "PROD"
+        PORT: 80
+
