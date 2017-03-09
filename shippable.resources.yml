@@ -2,7 +2,7 @@ resources:
 # gitRepo for scripts/config files
   - name: demo_java_ecr_gitrepo
     type: gitRepo
-    integration: github
+    integration: ttrahan-gh
     pointer:
       sourceName: shippableSamples/java-ecr-runcli-elasticbeanstalk
       branch: master
