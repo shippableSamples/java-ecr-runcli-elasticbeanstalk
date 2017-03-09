@@ -21,7 +21,7 @@ jobs:
       - TASK:
         # update Dockerrun.aws.json file with values
         - script: export ENVIRONMENT=$DEMO_JAVA_ECR_PARAMS_TEST_PARAMS_ENVIRONMENT PORT=$DEMO_JAVA_ECR_PARAMS_TEST_PARAMS_PORT
-        - script: cd $DEMO_JAVA_ECR_GITREPO_PATH/gitRepo
+        - script: cd $DEMO_JAVA_ECR_GITREPO_PATH/gitRepo/deploy
         # update Dockerrun.aws.json file with values in env variables
         - script: shippable_replace Dockerrun.aws.json 
         # initialize eb cli for app demo_java_ecr

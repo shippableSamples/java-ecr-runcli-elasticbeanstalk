@@ -21,6 +21,6 @@ mvncolor.sh
 shippable/
 
 # Elastic Beanstalk Files
-.elasticbeanstalk/*
+deploy/.elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
