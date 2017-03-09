@@ -12,22 +12,24 @@ jobs:
   - name: demo_java_ecr_test_deploy
     type: runCLI
     steps:
+      - IN: demo_java_ecr_img
       - IN: demo_java_ecr_awscli
       - IN: demo_java_ecr_gitrepo
-      - IN: demo_java_ecr_img
+        switch: off
       - IN: demo_java_ecr_params
       - IN: demo_java_ecr_params_test
       - TASK:
         # update Dockerrun.aws.json file with values
         - script: export ENVIRONMENT=$DEMO_JAVA_ECR_PARAMS_TEST_PARAMS_ENVIRONMENT PORT=$DEMO_JAVA_ECR_PARAMS_TEST_PARAMS_PORT
         - script: cd $DEMO_JAVA_ECR_GITREPO_PATH/gitRepo
+        # update Dockerrun.aws.json file with values in env variables
         - script: shippable_replace Dockerrun.aws.json 
-        - script: cat Dockerrun.aws.json
         # initialize eb cli for app demo_java_ecr
         - script: eb init demo_java_ecr --region us-east-1 --keyname kp-us-east-1
-        - script: eb deploy
-        # # save latest deployment to state
-        # - script: echo -e "LATEST_TEST_DEPLOY=$DEMO_JAVA_ECR_IMG_VERSIONNAME" >> $DEMO_JAVA_ECR_TEST_DEPLOY_STATE/latest_test_deploy.env
+        # deploy latest image to elastic beanstalk
+        - script: eb deploy $DEMO_JAVA_ECR_PARAMS_TEST_PARAMS_AWS_EB_ENVIRONMENT
+        # save latest deployment to state
+        - script: echo -e "LATEST_TEST_DEPLOY=$DEMO_JAVA_ECR_IMG_VERSIONNAME" >> $DEMO_JAVA_ECR_TEST_DEPLOY_STATE/latest_test_deploy.env
 
 # # runCLI job that deploys image in ECR to Elastic Beanstalk
 # # based on previous deployment to TEST environment

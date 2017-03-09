@@ -36,7 +36,7 @@ resources:
     type: params
     version:
       params:
-        ENVIRONMENT: "TEST"
+        ENVIRONMENT: "test"
         PORT: 80
         AWS_EB_ENVIRONMENT: "demoJavaEcr-test"
 
@@ -45,7 +45,7 @@ resources:
     type: params
     version:
       params:
-        ENVIRONMENT: "PROD"
+        ENVIRONMENT: "prod"
         PORT: 80
         AWS_EB_ENVIRONMENT: "demoJavaEcr-prod"
 
