@@ -24,7 +24,7 @@ jobs:
         - script: cd $DEMO_JAVA_ECR_GITREPO_PATH/gitRepo/deploy
         - script: pwd
         # update Dockerrun.aws.json file with values in env variables
-        - script: echo "updating Dockerrun.aws.json"
+        - script: echo "updating templates with environment variables"
         - script: shippable_replace Dockerrun.aws.json .ebextensions/environmentvariables.config
         # initialize eb cli for app demo_java_ecr
         - script: echo "initializing EB"
@@ -53,9 +53,11 @@ jobs:
         # update Dockerrun.aws.json file with values
         - script: export ENVIRONMENT=$DEMO_JAVA_ECR_PARAMS_PROD_PARAMS_ENVIRONMENT PORT=$DEMO_JAVA_ECR_PARAMS_PROD_PARAMS_PORT
         - script: cd $DEMO_JAVA_ECR_GITREPO_PATH/gitRepo/deploy
-        # update Dockerrun.aws.json file with values in env variables
-        - script: shippable_replace Dockerrun.aws.json
+        # update templates with environment variables
+        - script: echo "updating templates with environment variables"
+        - script: shippable_replace Dockerrun.aws.json .ebextensions/environmentvariables.config
         # initialize eb cli for app demo_java_ecr
+        - script: echo "initializing EB"
         - script: eb init demo_java_ecr --platform docker-1.12.6 --region us-east-1 --keyname kp-us-east-1
         # deploy latest image to elastic beanstalk
         - script: echo "Deploying new version to Elastic Beanstalk"
