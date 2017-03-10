@@ -2,7 +2,7 @@
 
 ![AyeAye](https://github.com/shippableSamples/node-build-push-docker-hub/blob/master/public/resources/images/captain.png)
 
-# Sample Java app with deploy to Tomcat running on EC/2
+# Sample Java/Tomcat app running in Docker container on Elastic Beanstalk
 [![Run Status](https://api.shippable.com/projects/5885ecca11c45a1000af5760/badge?branch=master)](https://app.shippable.com/projects/5885ecca11c45a1000af5760)
 [![Coverage Badge](https://api.shippable.com/projects/5885ecca11c45a1000af5760/coverageBadge?branch=master)](https://app.shippable.com/projects/5885ecca11c45a1000af5760)
 
@@ -11,9 +11,9 @@ A simple Java Hello World application with unit tests and coverage reports.
 
 This repo demonstrates the following features:
 * Set up serverless CI, i.e. on Shippable-provided infrastructure
-* Set up CD pipelines for a VM cluster running Tomcat on Amazon EC2
+* Set up CD pipelines for deploying docker images to Amazon Elastic Beanstalk
 * Perform CI tests
-* Perform Maven build and push war package to Amazon S3
+* Perform Maven build and 
 * Automatically deploy war package to TEST environment 
 * Manually deploy war package to PROD environment 
 * Set up runCLI job types in Shippable using AWS CLI

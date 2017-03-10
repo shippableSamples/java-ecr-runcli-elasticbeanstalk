@@ -30,6 +30,7 @@ resources:
     version:
       params:
         AWS_EB_APPLICATION: "demo_java_ecr"
+        PORT: 8080
 
 # params for TEST environment 
   - name: demo_java_ecr_params_test
@@ -37,7 +38,6 @@ resources:
     version:
       params:
         ENVIRONMENT: "test"
-        PORT: 8080
         AWS_EB_ENVIRONMENT: "demoJavaEcr-test"
 
 # params for PROD environment 
@@ -46,6 +46,5 @@ resources:
     version:
       params:
         ENVIRONMENT: "prod"
-        PORT: 8080
         AWS_EB_ENVIRONMENT: "demoJavaEcr-prod"
 
