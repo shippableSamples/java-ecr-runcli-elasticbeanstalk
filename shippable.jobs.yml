@@ -25,7 +25,7 @@ jobs:
         - script: pwd
         # update Dockerrun.aws.json file with values in env variables
         - script: echo "updating Dockerrun.aws.json"
-        - script: shippable_replace Dockerrun.aws.json 
+        - script: shippable_replace Dockerrun.aws.json .ebextensions/environmentvariables.config
         # initialize eb cli for app demo_java_ecr
         - script: echo "initializing EB"
         - script: eb init demo_java_ecr --platform docker-1.12.6 --region us-east-1 --keyname kp-us-east-1
