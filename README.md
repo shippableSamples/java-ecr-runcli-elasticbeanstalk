@@ -13,10 +13,12 @@ This repo demonstrates the following features:
 * Set up serverless CI, i.e. on Shippable-provided infrastructure
 * Set up CD pipelines for deploying docker images to Amazon Elastic Beanstalk
 * Perform CI tests
-* Perform Maven build and 
-* Automatically deploy war package to TEST environment 
-* Manually deploy war package to PROD environment 
-* Set up runCLI job types in Shippable using AWS CLI
+* Perform Maven build to generate .war package
+* Perform docker build to create Tomcat server with .war package
+* Push docker image to Amazon ECR
+* Automatically deploy docker image to TEST environment on Elastic Beanstalk
+* Manually deploy docker image to PROD environment on Elastic Beanstalk
+* Set up runCLI job types in Shippable using AWS EB CLI
 
 ## Run CI for this repo on Shippable
 * Fork this repo into your source code account (e.g. GitHub)
@@ -34,24 +36,22 @@ with your specific values
 * Create an integration for a [VM cluster](http://docs.shippable.com/integrations/deploy/nodeCluster)
 * Follow instructions to add your [Continuous Deployment pipeline]
 (http://docs.shippable.com/tutorials/pipelines/howToAddSyncRepos/)
-* Right-click on the runCLI job in the SPOG view named 'demo-war-s3-test-deploy' 
+* Right-click on the runCLI job in the SPOG view named 'demo-java-ecr-test-deploy' 
 and run the job
   * This demo uses custom scripting jobs called 'runCLI' jobs in Shippable - 
   [learn how more about runCLI jobs here](http://docs.shippable.com/pipelines/jobs/runCLI/) 
-* Your app should be deployed to your VM cluster representing your Test environment
+* Your app should be deployed to your Elastic Beanstalk Test environment
   * See http://{your-IP-address}:{your-test-env-port}/HelloWorld/hello in your browser
-* Follow instructions to [connect your Continuous Integration project to your 
-Continuous Delivery pipelines](http://docs.shippable.com/tutorials/pipelines/connectingCiPipelines/)
-* Right-click on the runCLI job in the SPOG view named 'demo-war-s3-prod-deploy'
+* Right-click on the runCLI job in the SPOG view named 'demo-java-ecr--prod-deploy'
 and run the job to deploy to your Prod instance
   * See http://{your-IP-address}:{your-prod-env-port}/HelloWorld/hello in your browser
 * Make a change to your forked repo and commit to GitHub - watch your pipeline 
-automatically execute CI with push to Amazon S3 and automatic deployment to the 
-Test environment in Amazon EC/2
+automatically execute CI with push to Amazon ECR and automatic deployment to the 
+Test environment in Amazon Elastic Beanstalk
 * Then right-click to deploy the newest changes to the Prod environment
 
 Your end-to-end pipeline is complete! Now, any change you make to the application 
-will be deployed to your Amazon EC/2 Test instance and be ready to manually deploy a 
+will be deployed to your Amazon Elastic Beanstalk Test instance and be ready to manually deploy a 
 Prod instance, as well.
 
 ### CI console screenshot
@@ -62,11 +62,4 @@ Prod instance, as well.
 
 ### CD Pipeline SPOG screenshot
 ![CD Pipeline](https://github.com/shippableSamples/java-s3-runcli-ec2/blob/master/resources/images/java-s3-ec2-CD.png)
-
-### Launch Tomcat instances for this demo
-
-A script for launching Tomcat instances on Amazon EC/2 can be found here:
-https://github.com/shippableSamples/java-s3-runcli-ec2/blob/master/installTomcat.sh
-
-Read the comments within the script for instructions.
 
