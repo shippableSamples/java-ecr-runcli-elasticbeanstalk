@@ -11,15 +11,17 @@ env:
 
 build:
   ci:
-    # install specific Maven version
-    - sudo wget http://www-us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
-    - sudo tar xzf apache-maven-3.3.9-bin.tar.gz -C /usr/local && rm -f apache-maven-3.3.9-bin.tar.gz
-    - ln -fs /usr/local/apache-maven-$3.3.9/bin/mvn /usr/bin
-    - echo "export PATH=$PATH:/usr/local/apache-maven-3.3.9/bin" >> $HOME/.bashrc
-    # create directories for testresults and codecoverage output
-    - mkdir -p shippable/testresults && mkdir -p shippable/codecoverage
+    # # install specific Maven version
+    # - sudo wget http://www-us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+    # - sudo tar xzf apache-maven-3.3.9-bin.tar.gz -C /usr/local && rm -f apache-maven-3.3.9-bin.tar.gz
+    # - ln -fs /usr/local/apache-maven-$3.3.9/bin/mvn /usr/bin
+    # - echo "export PATH=$PATH:/usr/local/apache-maven-3.3.9/bin" >> $HOME/.bashrc
+    # # create directories for testresults and codecoverage output
+    # - mkdir -p shippable/testresults && mkdir -p shippable/codecoverage
     # build using Maven
-    - /usr/local/apache-maven-3.3.9/bin/mvn -e -B clean cobertura:cobertura install
+    # - /usr/local/apache-maven-3.3.9/bin/mvn -q -B clean cobertura:cobertura install
+    - which mvn && mvn --version  
+    - mvn -q -B clean cobertura:cobertura install
     - ls -al $SHIPPABLE_BUILD_DIR/target
     # build docker image and push to registry
     - docker build -t $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER $SHIPPABLE_BUILD_DIR
