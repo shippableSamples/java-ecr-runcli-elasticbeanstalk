@@ -10,12 +10,6 @@ env:
     - DOCKER_REPO=shipdemo-java-ecr-eb
 
 build:
-  # # option to specify specific boot image
-  # pre_ci_boot:
-  #   image_name: drydock/u14
-  #   image_tag: tip
-  #   pull: true
-  #   options: '--privileged=true --net=bridge'
   ci:
     # install specific Maven version
     - sudo wget http://www-us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
@@ -25,7 +19,7 @@ build:
     # create directories for testresults and codecoverage output
     - mkdir -p shippable/testresults && mkdir -p shippable/codecoverage
     # build using Maven
-    - /usr/local/apache-maven-3.3.9/bin/mvn -q -B clean cobertura:cobertura install
+    - /usr/local/apache-maven-3.3.9/bin/mvn -e -B clean cobertura:cobertura install
     - ls -al $SHIPPABLE_BUILD_DIR/target
     # build docker image and push to registry
     - docker build -t $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER $SHIPPABLE_BUILD_DIR
