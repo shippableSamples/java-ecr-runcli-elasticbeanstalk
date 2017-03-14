@@ -8,6 +8,7 @@ env:
     # replace with your docker registry account name (e.g. Amazon ECR)
     - DOCKER_ACC=288971733297.dkr.ecr.us-east-1.amazonaws.com
     - DOCKER_REPO=shipdemo-java-ecr-eb
+    - AWS_DEFAULT_REGION=us-east-1
 
 build:
   ci:

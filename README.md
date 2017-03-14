@@ -55,11 +55,11 @@ will be deployed to your Amazon Elastic Beanstalk Test instance and be ready to 
 Prod instance, as well.
 
 ### CI console screenshot
-![CI Console Log](https://github.com/shippableSamples/java-s3-runcli-ec2/blob/master/resources/images/java-s3-ec2-CI.png)
+![CI Console Log](https://github.com/shippableSamples/java-ecr-runcli-elasticbeanstalk/blob/master/resources/images/java-ecr-runcli-CI.png)
 
-### VM node cluster integration screenshot
-![Integration View](https://github.com/shippableSamples/java-s3-runcli-ec2/blob/master/resources/images/java-s3-ec2-vm-integration.png)
+### AWS integration screenshot
+![Integration View](https://github.com/shippableSamples/java-ecr-runcli-elasticbeanstalk/blob/master/resources/images/java-ecr-runcli-vm-integration.png)
 
 ### CD Pipeline SPOG screenshot
-![CD Pipeline](https://github.com/shippableSamples/java-s3-runcli-ec2/blob/master/resources/images/java-s3-ec2-CD.png)
+![CD Pipeline](https://github.com/shippableSamples/java-ecr-runcli-elasticbeanstalk/blob/master/resources/images/java-ecr-runcli-CD.png)
 
