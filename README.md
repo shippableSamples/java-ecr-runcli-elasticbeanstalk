@@ -34,15 +34,14 @@ on Shippable for authenticating CI to AWS
 Check these files and update config wherever the comment asks you to replace 
 with your specific values
 * Create an integration for a [VM cluster](http://docs.shippable.com/integrations/deploy/nodeCluster)
-* Follow instructions to add your [Continuous Deployment pipeline]
-(http://docs.shippable.com/tutorials/pipelines/howToAddSyncRepos/)
+* Follow instructions to add your [Continuous Deployment pipeline](http://docs.shippable.com/tutorials/pipelines/howToAddSyncRepos/)
 * Right-click on the runCLI job in the SPOG view named 'demo-java-ecr-test-deploy' 
 and run the job
   * This demo uses custom scripting jobs called 'runCLI' jobs in Shippable - 
   [learn how more about runCLI jobs here](http://docs.shippable.com/pipelines/jobs/runCLI/) 
 * Your app should be deployed to your Elastic Beanstalk Test environment
   * See http://{your-IP-address}:{your-test-env-port}/HelloWorld/hello in your browser
-* Right-click on the runCLI job in the SPOG view named 'demo-java-ecr--prod-deploy'
+* Right-click on the runCLI job in the SPOG view named 'demo-java-ecr-prod-deploy'
 and run the job to deploy to your Prod instance
   * See http://{your-IP-address}:{your-prod-env-port}/HelloWorld/hello in your browser
 * Make a change to your forked repo and commit to GitHub - watch your pipeline 
