@@ -58,7 +58,7 @@ Prod instance, as well.
 ![CI Console Log](https://github.com/shippableSamples/java-ecr-runcli-elasticbeanstalk/blob/master/resources/images/java-ecr-runcli-elasticbeanstalk-CI.png)
 
 ### AWS integration screenshot
-![Integration View](https://github.com/shippableSamples/java-ecr-runcli-elasticbeanstalk/blob/master/resources/images/java-ecr-runcli-elasticbeanstalk-vm-integration.png)
+![Integration View](https://github.com/shippableSamples/java-ecr-runcli-elasticbeanstalk/blob/master/resources/images/java-ecr-runcli-elasticbeanstalk-integration.png)
 
 ### CD Pipeline SPOG screenshot
 ![CD Pipeline](https://github.com/shippableSamples/java-ecr-runcli-elasticbeanstalk/blob/master/resources/images/java-ecr-runcli-elasticbeanstalk-CD.png)
