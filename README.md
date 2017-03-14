@@ -11,7 +11,7 @@ A simple Java Hello World application with unit tests and coverage reports.
 
 This repo demonstrates the following features:
 * Set up serverless CI, i.e. on Shippable-provided infrastructure
-* Set up CD pipelines for deploying docker images to Amazon Elastic Beanstalk
+* Set up CD pipelines for deploying a docker image to a Single Container Docker Configuration on Amazon Elastic Beanstalk
 * Perform CI tests
 * Perform Maven build to generate .war package
 * Perform docker build to create Tomcat server with .war package
