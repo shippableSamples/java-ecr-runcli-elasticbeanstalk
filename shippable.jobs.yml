@@ -19,11 +19,11 @@ jobs:
       - IN: demo_java_ecr_params
       - IN: demo_java_ecr_params_test
       - TASK:
-        # load environment variables 
+        # assign Shippable-injected variables to variables used in templates
         - script: export ENVIRONMENT=$DEMO_JAVA_ECR_PARAMS_TEST_PARAMS_ENVIRONMENT PORT=$DEMO_JAVA_ECR_PARAMS_PARAMS_PORT IMAGE_REPO=$DEMO_JAVA_ECR_IMG_SOURCENAME IMAGE_TAG=$DEMO_JAVA_ECR_IMG_VERSIONNAME
+        # update template files with values in env variables
         - script: cd $DEMO_JAVA_ECR_GITREPO_STATE/deploy
         - script: pwd
-        # update Dockerrun.aws.json file with values in env variables
         - script: echo "updating templates with environment variables"
         - script: shippable_replace Dockerrun.aws.json .ebextensions/environmentvariables.config
         # initialize eb cli for app demo_java_ecr
@@ -50,10 +50,10 @@ jobs:
       - TASK:
         # load last build version deployed to test from incoming state file
         - script: source $DEMO_JAVA_ECR_TEST_DEPLOY_STATE/latest_test_deploy.env
-        # update Dockerrun.aws.json file with values
+        # assign Shippable-injected variables to variables used in templates
         - script: export ENVIRONMENT=$DEMO_JAVA_ECR_PARAMS_PROD_PARAMS_ENVIRONMENT PORT=$DEMO_JAVA_ECR_PARAMS_PARAMS_PORT
+        # update template files with values in env variables
         - script: cd $DEMO_JAVA_ECR_GITREPO_STATE/deploy
-        # update templates with environment variables
         - script: echo "updating templates with environment variables"
         - script: shippable_replace Dockerrun.aws.json .ebextensions/environmentvariables.config
         # initialize eb cli for app demo_java_ecr
