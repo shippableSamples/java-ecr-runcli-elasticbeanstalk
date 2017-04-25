@@ -33,7 +33,6 @@ on Shippable for authenticating CI to AWS
 * Pipeline configs are in `shippable.resources.yml` and `shippable.jobs.yml` 
 Check these files and update config wherever the comment asks you to replace 
 with your specific values
-* Create an integration for a [VM cluster](http://docs.shippable.com/integrations/deploy/nodeCluster)
 * Follow instructions to add your [Continuous Deployment pipeline](http://docs.shippable.com/tutorials/pipelines/howToAddSyncRepos/)
 * Right-click on the runCLI job in the SPOG view named 'demo-java-ecr-test-deploy' 
 and run the job
